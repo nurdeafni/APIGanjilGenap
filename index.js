@@ -27,10 +27,21 @@ server.route([
         },
         handler: (request,h) => {
             console.log(request.payload); //cek parameter inputan form
-            let panjangRequest = request.payload.panjang; // konversi string ke numbur
+            let panjangRequest = request.payload.panjang; // konversi string ke number
             let lebarRequest= request.payload.lebar;
             let hasil = parseInt(panjangRequest)*parseInt(lebarRequest) // bikin variabel penampung nilai luas
-            const data= {data:'persegi', ...request.payload,hasilPerhitungan:hasil} // bikin respon berbentuk json
+            const contentData={
+                data: 'Hitung Luas Bidang',
+                panjang: panjangRequest,
+                lebar: lebarRequest,
+                hasilPerhitungan: hasil
+            }
+            const data= {
+                statusCode:200, 
+                eror:'', 
+                massage:'Hitung Luas Persegi', 
+                content: contentData      
+            } // bikin respon berbentuk json
             return h.response(data).code(200) // return out put berupa json
         },
     },
